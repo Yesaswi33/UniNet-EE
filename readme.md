@@ -224,8 +224,7 @@ Each page dynamically displays navigation links based on the user's session stat
 
 # ⚙️ How to Run the Project
 
-## 1️⃣ Install Dependencies
-
+1️⃣ Install Dependencies
 ```bash
 pip install flask
 2️⃣ Run the Application
