@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us | UrbanVision AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .logo{
+            font-size: 24px;
+            font-weight: bold;
+            color: #2788d2ff;
+            text-decoration: none;
+        }
+        
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropbtn {
+    background-color: #2788d2ff;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 14px;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 140px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 6px;
+}
+.dropdown-content a {
+    color: black;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+.dropdown-content a:hover { background-color: #f1f1f1; }
+.dropdown:hover .dropdown-content { display: block; }
+
+
+    </style>
+</head>
+<body>
+<header class="navbar">
+    <div class="nav-container">
+        <a class="logo" href="/">UrbanVision AI</a>
+        <nav>
+    <a href="/">Home</a>
+    <a href="/upload">Analyze Image</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    
+
+    {% if logged_in %}
+        <div class="dropdown">
+            <button class="dropbtn">{{ user_email.split('@')[0] }} ⬇</button>
+            <div class="dropdown-content">
+                <a href="/profile">Profile</a>
+                <a href="/upload">History</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+    {% else %}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    {% endif %}
+    <a href='/admin/login'>Admin-Login</a>
+</nav>
+    </div>
+</header>
+
+<div class="page-bg">
+    <div class="auth-box" style="max-width: 900px; text-align:left;">
+
+        <h2 style="text-align:center;">About UrbanVision AI</h2>
+        <p class="auth-subtext" style="text-align:center;">
+            Hybrid Multi-Task AI for Environmental and Urban Scene Understanding
+        </p>
+
+        <p>
+            <strong>UrbanVision AI</strong> is a cutting-edge multi-task computer vision system that performs 
+            <strong>image classification, object detection, and semantic segmentation</strong> from a single input image.
+            Built as a hybrid deep learning framework, the system combines:
+        </p>
+        <ul>
+            <li><strong>CNN-based local feature extraction</strong> for precise object-level details</li>
+            <li><strong>Multi-head attention modules</strong> for capturing global scene context</li>
+            <li><strong>Slimmable network architecture</strong> for adaptive computation and edge deployment</li>
+            <li><strong>Early-exit mechanisms</strong> for faster inference on clear images</li>
+        </ul>
+
+        <h3>Hybrid Model Capabilities</h3>
+        <p>The model provides unified outputs with the following features:</p>
+
+        <ul>
+            <li><strong>Classification:</strong> Scene attributes including Day/Night, Weather (clear, rainy, foggy), Road type (highway, city, residential), Season, and Environmental categories.</li>
+            <li><strong>Object Detection:</strong> Detects vehicles, pedestrians, cyclists, traffic lights, and traffic signs with bounding boxes.</li>
+            <li><strong>Semantic Segmentation:</strong> Pixel-wise segmentation of road, lane markings, sidewalks, vehicles, sky, and buildings.</li>
+        </ul>
+
+        <h3>Multi-Task Output Heads</h3>
+        <table style="width:100%; margin-top:15px; border-collapse: collapse;">
+            <thead>
+                <tr style="background:#f3f4f6;">
+                    <th style="padding:10px;">Head</th>
+                    <th style="padding:10px;">Output</th>
+                    <th style="padding:10px;">Loss Function</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Classification</td>
+                    <td>Scene Class</td>
+                    <td>CrossEntropy</td>
+                </tr>
+                <tr>
+                    <td>Detection</td>
+                    <td>Bounding boxes + Labels</td>
+                    <td>Focal + IoU</td>
+                </tr>
+                <tr>
+                    <td>Segmentation</td>
+                    <td>Pixel-wise Mask</td>
+                    <td>Dice / CrossEntropy</td>
+                </tr>
+                <tr>
+                    <td>Early-Exit</td>
+                    <td>Fast Classification</td>
+                    <td>Confidence-based Exit</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Why This Hybrid Model Excels</h3>
+        <ul>
+            <li><strong>Slimmable Networks:</strong> Adjusts width dynamically — low width for edge devices like traffic cameras, high width for GPU inference.</li>
+            <li><strong>Multi-Head Attention:</strong> Captures global scene context, enabling better lane continuity, object relationships, and occlusion handling.</li>
+            <li><strong>Early Exit:</strong> Fast inference for clear images; full inference for challenging conditions like fog, night, or heavy traffic.</li>
+        </ul>
+
+        <h3>Real-World Applications</h3>
+        <ul>
+            <li>Traffic Monitoring: Analyze flow, congestion, and vehicle counts</li>
+            <li>Public Safety: Identify crowds, suspicious behavior, and anomalies</li>
+            <li>Environmental Analysis: Detect weather conditions, road types, and seasonal patterns</li>
+            <li>Smart Surveillance: Assist authorities in real-time scene understanding</li>
+            <li>Smart City Planning: Support urban infrastructure optimization</li>
+            <li>Research & AI Development: Foundation for multi-task AI research</li>
+            <li>Edge AI Deployment: Works efficiently on cameras and low-resource systems</li>
+        </ul>
+
+        <h3>Comparison With Other Domains</h3>
+        <table style="width:100%; margin-top:15px; border-collapse: collapse;">
+            <thead>
+                <tr style="background:#f3f4f6;">
+                    <th style="padding:10px;">Domain</th>
+                    <th style="padding:10px;">Verdict</th>
+                    <th style="padding:10px;">Reason</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Traffic Surveillance</td>
+                    <td>Best</td>
+                    <td>Naturally multi-task, scalable, real-world applicability</td>
+                </tr>
+                <tr>
+                    <td>Medical Imaging</td>
+                    <td>Medium</td>
+                    <td>Requires domain expertise, smaller datasets, mostly classification/segmentation</td>
+                </tr>
+                <tr>
+                    <td>Agriculture</td>
+                    <td>Medium</td>
+                    <td>Mostly classification/segmentation, less detection, limited real-time usage</td>
+                </tr>
+                <tr>
+                    <td>Satellite Imaging</td>
+                    <td>Heavy</td>
+                    <td>Very large images, memory expensive, hard to deploy on edge</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br>
+        <a href="/" class="btn-primary">Back to Home</a>
+
+    </div>
+</div>
+
+</body>
+</html>

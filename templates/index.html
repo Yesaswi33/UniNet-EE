@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UrbanVision AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .logo{
+            font-size: 24px;
+            font-weight: bold;
+            color: #2788d2ff;
+            text-decoration: none;
+        }
+        .dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropbtn {
+    background-color: #2788d2ff;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 14px;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 140px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 6px;
+}
+.dropdown-content a {
+    color: black;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+.dropdown-content a:hover { background-color: #f1f1f1; }
+.dropdown:hover .dropdown-content { display: block; }
+
+    </style>
+</head>
+<body>
+
+<header class="navbar">
+    <div class="nav-container">
+        <a class="logo" href="/">UrbanVision AI</a>
+
+        <nav>
+    <a href="/">Home</a>
+    <a href="/upload">Analyze Image</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    
+
+    {% if logged_in %}
+        <div class="dropdown">
+            <button class="dropbtn">{{ user_email.split('@')[0] }} ⬇</button>
+            <div class="dropdown-content">
+                <a href="/profile">Profile</a>
+                <a href="/upload">History</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+    {% else %}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    {% endif %}
+    <a href='/admin/login'>Admin-Login</a>
+</nav>
+    </div>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="hero-container">
+        <div class="hero-text">
+            <h1>Unified AI Vision for Smarter Cities</h1>
+            <p>
+                UrbanVision AI analyzes a single image to perform classification, detection,
+                and segmentation simultaneously. Our hybrid AI model provides real-time insights
+                into environments, traffic, people, objects, and weather conditions.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="/upload" class="btn-primary">Upload Image</a>
+                <a href="/about" class="btn-outline">Explore Model</a>
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <img
+                src="https://images.stockcake.com/public/d/d/6/dd682f5b-44a5-44c9-88b9-abe237ed9102_large/belebte-kreuzungen-stockcake.jpg"
+                alt="AI Vision"
+            >
+        </div>
+    </div>
+</section>
+
+
+
+<!-- SERVICES SECTION -->
+<section class="services">
+    <h2>Core Capabilities</h2>
+    <p class="section-subtitle">
+        Multi-task AI vision from a single image input.
+    </p>
+
+    <div class="service-grid">
+        <div class="service-card">
+            <h3>Image Classification</h3>
+            <p>Scene type, weather, season, and road type (Day/Night, Clear/Rainy/Foggy, Highway/City/Residential).</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Object Detection</h3>
+            <p>Detects vehicles, pedestrians, cyclists, traffic lights, and traffic signs.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Image Segmentation</h3>
+            <p>Pixel-wise segmentation for road, lane markings, sidewalks, vehicles, sky, and buildings.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Smart City Insights</h3>
+            <p>Analyze traffic density, crowd presence, and environmental conditions.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- STATS SECTION -->
+<section class="stats">
+    <div class="stats-container">
+        <div class="stat-box">
+            <h2>3</h2>
+            <p>Vision Tasks</p>
+        </div>
+        <div class="stat-box">
+            <h2>1</h2>
+            <p>Unified Model</p>
+        </div>
+        <div class="stat-box">
+            <h2>AI</h2>
+            <p>Hybrid Architecture</p>
+        </div>
+        <div class="stat-box">
+            <h2>Real-Time</h2>
+            <p>Insights</p>
+        </div>
+    </div>
+</section>
+<!-- OUTPUT HEADS -->
+<section class="services">
+    <h2>Multi-task Output Heads</h2>
+    <p class="section-subtitle">
+        One dataset → Three outputs
+    </p>
+
+    <div class="service-grid">
+        <div class="service-card">
+            <h3>Classification Head</h3>
+            <p>Output: Scene class</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Detection Head</h3>
+            <p>Output: Bounding boxes + labels</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Segmentation Head</h3>
+            <p>Output: Pixel-wise mask</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Early-exit Heads</h3>
+            <p>Fast classification for clear images | Confidence-based exit</p>
+        </div>
+    </div>
+</section>
+
+<!-- WHY THIS MODEL -->
+<section class="services">
+    <h2>Why UrbanVision AI Fits This Domain Perfectly</h2>
+    <p class="section-subtitle">
+        Slimmable, multi-head attention, and early exit mechanisms make the model ideal for traffic and environmental analysis.
+    </p>
+
+    <div class="service-grid">
+        <div class="service-card">
+            <h3>Slimmable Networks</h3>
+            <p>Low width → edge devices (traffic cameras). High width → full GPU inference.</p>
+        </div>
+        <div class="service-card">
+            <h3>Multi-head Attention</h3>
+            <p>Captures global road context → lane continuity, vehicle relationships, occlusion handling.</p>
+        </div>
+        <div class="service-card">
+            <h3>Early Exit</h3>
+            <p>Clear images → fast exit. Night/fog → full inference.</p>
+        </div>
+    </div>
+</section>
+
+<!-- APPLICATIONS SECTION -->
+<section class="doctors">
+    <h2>Applications</h2>
+    <p class="section-subtitle">
+        UrbanVision AI can be used across multiple domains.
+    </p>
+
+    <div class="doctor-grid">
+        <div class="doctor-card">
+            <h3>Traffic Monitoring</h3>
+            <p>Analyze traffic flow, congestion, and density using AI vision.</p>
+        </div>
+
+        <div class="doctor-card">
+            <h3>Public Safety</h3>
+            <p>Identify suspicious activities and crowd patterns.</p>
+        </div>
+
+        <div class="doctor-card">
+            <h3>Environmental Analysis</h3>
+            <p>Detect weather conditions and environmental changes.</p>
+        </div>
+
+        <div class="doctor-card">
+            <h3>Smart Surveillance</h3>
+            <p>Assist authorities with real-time visual intelligence.</p>
+        </div>
+
+        <div class="doctor-card">
+            <h3>Research & AI Development</h3>
+            <p>Foundation for hybrid multi-task AI research.</p>
+        </div>
+
+        <div class="doctor-card">
+            <h3>Smart Cities</h3>
+            <p>Support intelligent urban infrastructure systems.</p>
+        </div>
+
+        <div class="doctor-card">
+            <h3>Medical Imaging</h3>
+            <p>Skin lesion analysis: classification, segmentation, detection (small datasets, domain expertise required).</p>
+        </div>
+
+        <div class="doctor-card">
+            <h3>Agriculture / Satellite Imaging</h3>
+            <p>Medium applicability: mostly classification/segmentation, large images can be memory-intensive.</p>
+        </div>
+    </div>
+
+    <div class="center-btn">
+        <a href="/upload" class="btn-primary">Try UrbanVision AI</a>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+    <h2>Experience Unified AI Vision</h2>
+    <p>Upload an image and discover multi-level insights powered by UrbanVision AI.</p>
+    <a href="/upload" class="btn-primary large">Start Analysis</a>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload File | UrbanVision AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Dropdown styles */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropbtn {
+            background-color: #2788d2ff;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 140px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 6px;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 8px 12px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+        }
+        .dropdown-content a:hover { background-color: #f1f1f1; }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        /* Prediction box */
+        .prediction-box {
+            margin-top: 20px;
+            text-align: center;
+            background: #f3f4f6;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .prediction-box img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .prediction-result {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #0f766e;
+        }
+        .prediction-row {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="navbar">
+    <div class="nav-container">
+        <a class="logo" href="/">UrbanVision AI</a>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/upload">Analyze Image</a>
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+
+            {% if logged_in %}
+                <div class="dropdown">
+                    <button class="dropbtn">{{ user_email.split('@')[0] }} ⬇</button>
+                    <div class="dropdown-content">
+                        <a href="/profile">Profile</a>
+                        <a href="/upload">History</a>
+                        <a href="/logout">Logout</a>
+                    </div>
+                </div>
+            {% else %}
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+            {% endif %}
+            <a href='/admin/login'>Admin-Login</a>
+        </nav>
+    </div>
+</header>
+
+<!-- UPLOAD FORM -->
+<div class="page-bg ai-bg">
+    <div class="auth-box">
+        <div class="auth-icon">📁</div>
+
+        <h2>Upload Your File</h2>
+        <p class="auth-subtext">
+            Upload images for AI analysis with UrbanVision.
+        </p>
+
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <label>Select File</label>
+            <input type="file" name="file" required>
+            <button type="submit" class="btn-primary full-btn">
+                Upload & Analyze
+            </button>
+        </form>
+
+        <p class="switch-auth">
+            Supported formats: JPG, PNG
+        </p>
+
+        <!-- Display predictions if available -->
+        {% if uploaded_filename %}
+        <div class="prediction-box">
+            <img src="{{ url_for('static', filename='uploads/' + uploaded_filename) }}" alt="Uploaded Image">
+            <div class="prediction-row">
+                {% if weather_result %}
+                <div class="prediction-result">Weather Prediction: {{ weather_result }}</div>
+                {% endif %}
+                {% if daynight_result %}
+                <div class="prediction-result">Time Prediction: {{ daynight_result }}</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>

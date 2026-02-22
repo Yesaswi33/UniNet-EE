@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us | UrbanVision AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .logo{
+            font-size: 24px;
+            font-weight: bold;
+            color: #2788d2ff;
+            text-decoration: none;
+        }
+
+        /* Max width for main content */
+        .contact-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Form styling */
+        .contact-form {
+            background: #fff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 50px;
+        }
+
+        .contact-form h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #0f766e;
+        }
+
+        .contact-form p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .contact-form button {
+            background: #0f766e;
+            color: #fff;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .contact-form button:hover {
+            background: #11595eff;
+        }
+
+        /* Team / Supervisor Cards */
+        .team-section {
+            margin-top: 50px;
+        }
+
+        .team-section h3 {
+            text-align: center;
+            color: #0f766e;
+            margin-bottom: 15px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .team-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .team-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .team-card h4 {
+            margin: 8px 0 4px;
+        }
+
+        .team-card p {
+            margin: 4px 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .team-card a {
+            color: #0f766e;
+            text-decoration: none;
+        }
+
+        /* College Info */
+        .college-info {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #555;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .contact-form, .team-card {
+                padding: 25px;
+            }
+        }
+        .dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropbtn {
+    background-color: #2788d2ff;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 14px;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 140px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 6px;
+}
+.dropdown-content a {
+    color: black;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+.dropdown-content a:hover { background-color: #f1f1f1; }
+.dropdown:hover .dropdown-content { display: block; }
+
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="navbar">
+    <div class="nav-container">
+        <a class="logo" href="/">UrbanVision AI</a>
+        <nav>
+    <a href="/">Home</a>
+    <a href="/upload">Analyze Image</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    
+
+    {% if logged_in %}
+        <div class="dropdown">
+            <button class="dropbtn">{{ user_email.split('@')[0] }} ⬇</button>
+            <div class="dropdown-content">
+                <a href="/profile">Profile</a>
+                <a href="/upload">History</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+    {% else %}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    {% endif %}
+    <a href='/admin/login'>Admin-Login</a>
+</nav>
+    </div>
+</header>
+
+<div class="page-bg">
+    <div class="contact-container">
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+            <h2>Get in Touch</h2>
+            <p>Reach out for project collaboration, technical support, or research inquiries</p>
+
+            {% if message %}
+                <p style="color:green; text-align:center;">{{ message }}</p>
+            {% endif %}
+
+            <form method="POST" action="/contact">
+                <label>Full Name</label>
+                <input type="text" name="name" placeholder="Enter your full name" required>
+
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="Enter your email address" required>
+
+                <label>Message</label>
+                <textarea name="message" rows="5" placeholder="Share your queries, feedback, or collaboration ideas..." required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+        <!-- College / Project Info -->
+        <div class="college-info">
+            <p>Vizianagaram , Andhra Pradesh, India</p>
+            <p> MVGR College of Engineering, Vizianagaram</p>
+            <p>UrbanVision AI – Unified Multi-Task Vision System</p>
+        </div>
+
+        <!-- Team & Supervisor -->
+        <div class="team-section">
+            <h3>Supervisor & Team Members</h3>
+            <div class="team-grid">
+                <!-- Supervisor -->
+                <div class="team-card">
+                    <img src="{{ url_for('static', filename='team_images/supervisor.jpeg') }}" alt="Supervisor">
+                    <h4>Dr. P. Satheesh</h4>
+                    <p>Supervisor | Professor, DE, M.Tech, Ph.D</p>
+                    <p>SATISH@MVGRCE.EDU.IN</p>
+                    <p>+91 92466 15251</p>
+                    <p><a href="https://www.mvgrce.com/faculty-of-mvgr/?dept=&fid=282" target="_blank">Website</a></p>
+                </div>
+
+                <!-- Member 1 -->
+                <div class="team-card">
+                    <img src="{{ url_for('static', filename='team_images/yesaswi.jpg') }}" alt="Yesaswi">
+                    <h4>Venkata Padma Yesaswi Madabattula</h4>
+                    <p>Team Leader | Student</p>
+                    <p>madabattulayesaswi@gmail.com</p>
+                    <p>+91 9494138821</p>
+                    <p><a href="https://www.linkedin.com/in/yesaswi-madabattula" target="_blank">LinkedIn</a></p>
+                </div>
+
+                <!-- Member 2 -->
+                <div class="team-card">
+                    <img src="{{ url_for('static', filename='team_images/dileep.jpeg') }}" alt="Dileep">
+                    <h4>Vayilapalli Dileep</h4>
+                    <p>Team Member | Student</p>
+                    <p>dileepvayilapalli@gmail.com</p>
+                    <p>+91 8919340546</p>
+                    <p><a href="https://www.linkedin.com/in/dileep" target="_blank">LinkedIn</a></p>
+                </div>
+
+                <!-- Member 3 -->
+                <div class="team-card">
+                    <img src="{{ url_for('static', filename='team_images/chandu.jpeg') }}" alt="Chandra Sekhar">
+                    <h4>K. Chandra Sekhar</h4>
+                    <p>Team Member | Student</p>
+                    <p>chandrasekhar20634@gmail.com</p>
+                    <p>+91 6303163137</p>
+                    <p><a href="https://www.linkedin.com/in/chandra" target="_blank">LinkedIn</a></p>
+                </div>
+
+                <!-- Member 4 -->
+                <div class="team-card">
+                    <img src="{{ url_for('static', filename='team_images/ramya.jpeg') }}" alt="Ramya Sree">
+                    <h4>V. Ramya Sree</h4>
+                    <p>Team Member | Student</p>
+                    <p>ramyasreeveerla117@gmail.com</p>
+                    <p>+91 8688065801</p>
+                    <p><a href="https://www.linkedin.com/in/ramya" target="_blank">LinkedIn</a></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UrbanVision AI | Admin Dashboard</title>
+
+  <!-- MAIN CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+
+<body>
+
+<!-- ===== ADMIN CONTAINER ===== -->
+<div class="admin-container">
+
+  <!-- ===== HEADER / HERO ===== -->
+  <section class="hero">
+    <div class="hero-container">
+      <div>
+        <h1>UrbanVision AI Dashboard</h1>
+        <p>Welcome back, Admin</p>
+      </div>
+      <a href="/upload" class="btn-primary">+ Analyze New Image</a>
+    </div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <section class="stats">
+    <div class="stats-container">
+      <div class="stat-box">
+        <h2>1,245</h2>
+        <p>Total Images Processed</p>
+      </div>
+      <div class="stat-box">
+        <h2>3</h2>
+        <p>AI Tasks</p>
+      </div>
+      <div class="stat-box">
+        <h2>128</h2>
+        <p>Active Users</p>
+      </div>
+      <div class="stat-box">
+        <h2>Hybrid</h2>
+        <p>Model Architecture</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MAIN GRID ===== -->
+  <div class="admin-grid">
+
+    <!-- ===== LEFT: AI ANALYSIS LOGS ===== -->
+    <div class="admin-main">
+      <div class="hospital-card">
+        <h3>Recent AI Analysis</h3>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Image ID</th>
+              <th>Scene Type</th>
+              <th>Detected Objects</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>#IMG1023</td>
+              <td>Urban Traffic</td>
+              <td>Cars, People, Signals</td>
+              <td><span style="color: green;">Completed</span></td>
+            </tr>
+
+            <tr>
+              <td>#IMG1024</td>
+              <td>Rainy Environment</td>
+              <td>Vehicles, Roads</td>
+              <td><span style="color: green;">Completed</span></td>
+            </tr>
+
+            <tr>
+              <td>#IMG1025</td>
+              <td>Public Crowd</td>
+              <td>People, Buildings</td>
+              <td><span style="color: orange;">Processing</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== RIGHT: SIDEBAR ===== -->
+    <div class="admin-side">
+
+      <!-- Quick Actions -->
+      <div class="hospital-card">
+        <h3>Quick Actions</h3>
+        <ul class="quick-actions">
+          <li><a href="/upload">➕ Analyze Image</a></li>
+          <li><a href="#">🧠 Manage AI Model</a></li>
+          <li><a href="#">📊 View Analytics</a></li>
+          <li><a href="#">⚙️ System Settings</a></li>
+        </ul>
+      </div>
+
+      <!-- System Status -->
+      <div class="hospital-card">
+        <h3>System Status</h3>
+        <p><strong>Model:</strong> UniNetEE Hybrid Model</p>
+        <p><strong>Dataset:</strong> Ready</p>
+        <p><strong>GPU:</strong> Not Available</p>
+        <p><strong>Status:</strong> <span style="color: orange;">Training Pending</span></p>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

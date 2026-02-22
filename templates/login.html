@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | UrbanVision AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .logo{
+            font-size: 24px;
+            font-weight: bold;
+            color: #2788d2ff;
+            text-decoration: none;
+        }
+        .dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropbtn {
+    background-color: #2788d2ff;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 14px;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 140px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 6px;
+}
+.dropdown-content a {
+    color: black;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+}
+.dropdown-content a:hover { background-color: #f1f1f1; }
+.dropdown:hover .dropdown-content { display: block; }
+
+    </style>
+</head>
+<body>
+
+<header class="navbar">
+    <div class="nav-container">
+        <a class="logo" href="/">UrbanVision AI</a>
+        <nav>
+    <a href="/">Home</a>
+    <a href="/upload">Analyze Image</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+    
+
+    {% if logged_in %}
+        <div class="dropdown">
+            <button class="dropbtn">{{ user_email.split('@')[0] }} ⬇</button>
+            <div class="dropdown-content">
+                <a href="/profile">Profile</a>
+                <a href="/upload">History</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+    {% else %}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    {% endif %}
+    <a href='/admin/login'>Admin-Login</a>
+</nav>
+    </div>
+</header>
+
+<div class="page-bg">
+    <div class="auth-box">
+
+        <!-- ICON -->
+        <div class="auth-icon">🤖</div>
+
+        <h2>Welcome Back!</h2>
+        <p class="auth-subtext">Sign in to access UrbanVision AI platform</p>
+
+        {% if error %}
+            <p style="color:red; text-align:center;">{{ error }}</p>
+        {% endif %}
+        {% if message %}
+            <p style="color:green; text-align:center;">{{ message }}</p>
+        {% endif %}
+
+        <form method="POST" action="/login" onsubmit="return validateLogin()">
+            <label>Email Address</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+            <label>Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+            <div class="auth-row">
+                <label class="remember">
+                    <input type="checkbox"> Keep me signed in
+                </label>
+                <a href="/forgot-password" class="link">Forgot your password?</a>
+            </div>
+
+            <button type="submit" class="btn-primary full-btn">Login</button>
+        </form>
+
+        <p class="switch-auth">
+            New to UrbanVision AI? 
+            <a href="/register">Create an account</a>
+        </p>
+
+        <div class="divider">Or login using</div>
+
+        <div class="social-buttons">
+            <button class="social google" type="button" onclick="window.location.href='/login/google'">Continue with Google</button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+function validateLogin() {
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    if (!email || !password) {
+        alert("Please enter both email and password.");
+        return false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert("Please enter a valid email address.");
+        return false;
+    }
+
+    return true;
+}
+</script>
+
+</body>
+</html>
