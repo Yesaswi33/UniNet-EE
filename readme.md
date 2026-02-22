@@ -1,240 +1,237 @@
-🌆 UrbanVision AI
+# 🌆 UrbanVision AI
 
-Unified Multi-Task AI System for Urban & Environmental Scene Understanding
+## Unified Multi-Task AI System for Urban & Environmental Scene Understanding
 
-UrbanVision AI is a hybrid multi-task computer vision platform that performs image classification, object detection, and semantic segmentation simultaneously from a single image.
+UrbanVision AI is a **hybrid multi-task computer vision platform** that performs:
 
-It also includes a full-stack web application with authentication, user history, email-based password recovery, admin dashboard, and AI-powered image analysis.
+- 🧠 Image Classification  
+- 🚗 Object Detection  
+- 🏙️ Semantic Segmentation  
 
-This project demonstrates the integration of AI + Web Development + System Design into a unified intelligent platform.
+All from a **single uploaded image**.
 
-🚀 Key Highlights  ✨
+It also includes a **full-stack web application** with authentication, user history, OTP-based password recovery, admin dashboard, and AI-powered image analysis.
 
-🧠 Hybrid AI Model → Classification + Detection + Segmentation in one system
+This project demonstrates the integration of:
 
-⚡ Single Image → Multiple Insights
+> 🤖 Artificial Intelligence + 🌐 Web Development + 🏗️ System Design
 
-👤 User Authentication System
+---
 
-🔐 Secure Password Reset with OTP (Email)
+# 🚀 Key Highlights
 
-📁 File Upload & AI Analysis
+- 🧠 Hybrid AI Model → Classification + Detection + Segmentation  
+- ⚡ Single Image → Multiple Insights  
+- 👤 User Authentication System  
+- 🔐 Secure Password Reset with OTP (Email)  
+- 📁 File Upload & AI Analysis  
+- 🕒 User History Tracking  
+- 👤 Profile Dashboard  
+- 🛡️ Session & Cookie-Based Login  
+- 📩 Contact Form with Email Integration  
+- 👨‍💻 Admin Dashboard  
+- 🌐 Responsive Web UI  
+- 🧩 Modular Flask Architecture  
 
-🕒 User History Tracking
+---
 
-👤 Profile Dashboard
+# 📌 Project Architecture
 
-🛡️ Session & Cookie-Based Login
 
-📩 Contact Form with Email Integration
-
-👨‍💻 Admin Dashboard
-
-🌐 Responsive Web UI
-
-🧩 Modular Flask Architecture
-
-📌 Project Architecture
 UrbanVision-AI/
 │
-├── app.py                 # Main Flask backend
-├── uploads/               # Uploaded files
+├── app.py # Main Flask backend
+├── uploads/ # Uploaded files
 ├── static/
-│   ├── css/
-│   │   └── style.css      # Main styles
-│   └── team_images/       # Team photos
+│ ├── css/
+│ │ └── style.css # Main styles
+│ └── team_images/ # Team photos
 │
 ├── templates/
-│   ├── index.html
-│   ├── login.html
-│   ├── register.html
-│   ├── forgot_password.html
-│   ├── reset_password.html
-│   ├── upload.html
-│   ├── profile.html
-│   ├── about.html
-│   ├── contact.html
-│   ├── admin_login.html
-│   ├── admin_dashboard.html
+│ ├── index.html
+│ ├── login.html
+│ ├── register.html
+│ ├── forgot_password.html
+│ ├── reset_password.html
+│ ├── upload.html
+│ ├── profile.html
+│ ├── about.html
+│ ├── contact.html
+│ ├── admin_login.html
+│ ├── admin_dashboard.html
 │
-└── README.md              # Project documentation
+└── README.md # Project documentation
 
-🧠 AI Capabilities
+
+---
+
+# 🧠 AI Capabilities
 
 UrbanVision AI performs three core computer vision tasks:
 
-1️⃣ Image Classification
+---
+
+## 1️⃣ Image Classification
 
 Identifies scene attributes such as:
 
-Day / Night
+- 🌞 Day / Night  
+- 🌧️ Weather (Clear, Rainy, Foggy)  
+- 🛣️ Road Type (Highway, City, Residential)  
+- 🌳 Environment Category  
 
-Weather (Clear, Rainy, Foggy)
+---
 
-Road Type (Highway, City, Residential)
-
-Environment Category
-
-2️⃣ Object Detection
+## 2️⃣ Object Detection
 
 Detects objects like:
 
-Vehicles 🚗
+- 🚗 Vehicles  
+- 🚶 Pedestrians  
+- 🚴 Cyclists  
+- 🚦 Traffic Lights  
+- 🛑 Traffic Signs  
 
-Pedestrians 🚶
+---
 
-Cyclists 🚴
+## 3️⃣ Semantic Segmentation
 
-Traffic lights 🚦
+Performs pixel-wise segmentation of:
 
-Traffic signs 🛑
+- 🛣️ Roads  
+- 🏢 Buildings  
+- ☁️ Sky  
+- 🚗 Vehicles  
+- 🚶 Sidewalks  
+- 🟡 Lane Markings  
 
-3️⃣ Semantic Segmentation
+---
 
-Pixel-wise segmentation of:
+# 💻 Web Application Features
 
-Roads
+## 👤 User Authentication
 
-Buildings
+- Register new users  
+- Login with email & password  
+- Session-based authentication (cookies)  
+- Logout functionality  
 
-Sky
+---
 
-Vehicles
+## 🔐 Forgot Password (OTP System)
 
-Sidewalks
+- Email-based OTP verification  
+- OTP expiry (10 minutes)  
+- Secure password reset  
 
-Lane markings
+---
 
-💻 Web Application Features
-👤 User Authentication
+## 📁 File Upload & Analysis
 
-Register new users
+- Users upload images/files  
+- Files stored securely with unique IDs  
+- User-specific upload history tracked  
 
-Login with email & password
+---
 
-Session-based authentication (cookies)
+## 🕒 User History
 
-Logout functionality
+Each user has a personal history of uploaded files stored and displayed in the profile page.
 
-🔐 Forgot Password (OTP System)
+---
 
-Email-based OTP verification
-
-OTP expiry (10 minutes)
-
-Secure password reset
-
-📁 File Upload & Analysis
-
-Users upload images/files
-
-Files stored securely with unique IDs
-
-User-specific upload history tracked
-
-🕒 User History
-
-Each user has a personal history of uploaded files
-
-Stored and displayed in profile page
-
-👤 User Profile Page
+## 👤 User Profile Page
 
 Displays:
 
-Name
+- Name  
+- Email  
+- Upload History  
 
-Email
+---
 
-Upload history
+## 📩 Contact Form
 
-📩 Contact Form
+- Sends emails to team members  
+- Prevents duplicate form submission  
+- Uses POST → Redirect → GET pattern  
 
-Sends emails to all team members
+---
 
-Prevents duplicate sending on refresh (POST → Redirect → GET pattern)
+## 👨‍💻 Admin Panel
 
-👨‍💻 Admin Panel
+- Admin login  
+- Dashboard with system stats  
+- Recent AI analysis logs  
+- Quick action panel  
 
-Admin login
+---
 
-Dashboard with system stats
+# 🍪 Session & Cookie System
 
-Recent AI analysis logs
+- Flask session used for authentication  
+- Session stores user email  
+- Optional session timeout configuration  
+- Navbar dynamically changes based on login status  
 
-Quick actions panel
+### Dynamic Navbar Example
 
-🍪 Session & Cookie System
+| User Status        | Navbar Options |
+|-------------------|----------------|
+| Guest              | Home, About, Contact, Login, Register |
+| Logged-in User     | Home, Upload, Profile, History, Logout |
+| Admin              | Dashboard, System Controls |
 
-Flask session used for authentication
+---
 
-Session stores user email
+# 🔄 Dynamic Navbar System
 
-Optional session timeout configuration
+Each page dynamically displays navigation links based on the user's session state.
 
-Navbar dynamically changes based on login status
+---
 
-Example:
+# 🛠️ Technologies Used
 
-User Status	Navbar Options
-Guest	Home, About, Contact, Login, Register
-Logged-in User	Home, Upload, Profile, History, Logout
-Admin	Dashboard, System Controls
-🔄 Dynamic Navbar System
+## Backend
 
-Every page dynamically displays navigation links based on user session.
+- Python 🐍  
+- Flask 🌐  
+- SMTP (Email Service)  
+- Session & Cookies  
 
-🛠️ Technologies Used
-Backend
+## Frontend
 
-Python 🐍
+- HTML5  
+- CSS3  
+- JavaScript  
+- Jinja2 Templates  
 
-Flask 🌐
+## AI / ML (Conceptual Integration)
 
-SMTP (Email Service)
+- CNN (Convolutional Neural Networks)  
+- Multi-head Attention  
+- Semantic Segmentation  
+- Object Detection Models  
 
-Session & Cookies
+## Security
 
-Frontend
+- OTP Verification  
+- Session Management  
+- Unique File Naming  
+- Email Authentication  
 
-HTML5
+---
 
-CSS3
+# ⚙️ How to Run the Project
 
-JavaScript
+## 1️⃣ Install Dependencies
 
-Jinja2 Templates
-
-AI / ML (Conceptual Integration)
-
-CNN (Convolutional Neural Networks)
-
-Multi-head Attention
-
-Semantic Segmentation
-
-Object Detection Models
-
-Security
-
-OTP verification
-
-Session management
-
-Unique file naming
-
-Email authentication
-
-⚙️ How to Run the Project
-1️⃣ Install Dependencies
+```bash
 pip install flask
-
 2️⃣ Run the Application
 python app.py
-
 3️⃣ Open in Browser
 http://127.0.0.1:5000/
-
 🧪 Demo Flow (User Journey)
 
 Register a new account
@@ -314,6 +311,9 @@ Department of Data Engineering
 ⭐ Final Note
 
 UrbanVision AI is not just a project —
-it is a fusion of Artificial Intelligence, Web Engineering, and Smart City Vision.
 
-It demonstrates how a single intelligent system can transform raw images into meaningful urban insights.
+It is a fusion of:
+
+🤖 Artificial Intelligence
+🌐 Web Engineering
+🏙️ Smart City Vision
