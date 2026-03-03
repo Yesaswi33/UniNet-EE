@@ -1,4 +1,4 @@
-# 🌆 UrbanVision AI
+# 🌆 UniNet-EE
 
 ## Unified Multi-Task AI System for Urban & Environmental Scene Understanding
 
