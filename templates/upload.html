@@ -2,15 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload File | UrbanVision AI</title>
+    <title>Analyze Image | UniNet-EE</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
     <style>
-        /* Dropdown styles */
+        .logo{
+            font-size: 24px;
+            font-weight: bold;
+            color: #2788d2ff;
+            text-decoration: none;
+        }
+
         .dropdown {
             position: relative;
             display: inline-block;
         }
+
         .dropbtn {
             background-color: #2788d2ff;
             color: white;
@@ -20,15 +27,17 @@
             border-radius: 6px;
             font-size: 14px;
         }
+
         .dropdown-content {
             display: none;
             position: absolute;
             background-color: #f9f9f9;
             min-width: 140px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
             z-index: 1;
             border-radius: 6px;
         }
+
         .dropdown-content a {
             color: black;
             padding: 8px 12px;
@@ -36,45 +45,23 @@
             display: block;
             font-size: 14px;
         }
-        .dropdown-content a:hover { background-color: #f1f1f1; }
-        .dropdown:hover .dropdown-content { display: block; }
 
-        /* Prediction box */
-        .prediction-box {
-            margin-top: 20px;
-            text-align: center;
-            background: #f3f4f6;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
         }
-        .prediction-box img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 10px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-        .prediction-result {
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 10px;
-            color: #0f766e;
-        }
-        .prediction-row {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 10px;
+
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
     </style>
 </head>
-<body>
 
-<!-- HEADER -->
+<body class="ai-bg">
+
+<!-- ================= NAVBAR ================= -->
 <header class="navbar">
     <div class="nav-container">
-        <a class="logo" href="/">UrbanVision AI</a>
+        <a class="logo" href="/">UniNet-EE</a>
         <nav>
             <a href="/">Home</a>
             <a href="/upload">Analyze Image</a>
@@ -83,7 +70,9 @@
 
             {% if logged_in %}
                 <div class="dropdown">
-                    <button class="dropbtn">{{ user_email.split('@')[0] }} ⬇</button>
+                    <button class="dropbtn">
+                        {{ user_email.split('@')[0] }} ⬇
+                    </button>
                     <div class="dropdown-content">
                         <a href="/profile">Profile</a>
                         <a href="/upload">History</a>
@@ -94,49 +83,130 @@
                 <a href="/login">Login</a>
                 <a href="/register">Register</a>
             {% endif %}
-            <a href='/admin/login'>Admin-Login</a>
+
+            <a href="/admin/login">Admin-Login</a>
         </nav>
     </div>
 </header>
 
-<!-- UPLOAD FORM -->
-<div class="page-bg ai-bg">
+
+<!-- ================= PAGE HEADER ================= -->
+<section class="page-header">
+    <h1>Intelligent Scene Analysis</h1>
+    <p>Upload an image to analyze scene category and visual elements</p>
+</section>
+
+
+<!-- ================= UPLOAD SECTION ================= -->
+<section class="page-bg ai-bg">
     <div class="auth-box">
-        <div class="auth-icon">📁</div>
 
-        <h2>Upload Your File</h2>
-        <p class="auth-subtext">
-            Upload images for AI analysis with UrbanVision.
-        </p>
+        <div class="auth-icon">📷</div>
+        <h2>Upload Image</h2>
+        <p class="auth-subtext">Supported formats: JPG, PNG</p>
 
-        <form action="/upload" method="POST" enctype="multipart/form-data">
-            <label>Select File</label>
+        <form method="POST" enctype="multipart/form-data">
+            <label>Select Image</label>
             <input type="file" name="file" required>
+            <br><br>
             <button type="submit" class="btn-primary full-btn">
                 Upload & Analyze
             </button>
         </form>
 
-        <p class="switch-auth">
-            Supported formats: JPG, PNG
-        </p>
+    </div>
+</section>
 
-        <!-- Display predictions if available -->
-        {% if uploaded_filename %}
-        <div class="prediction-box">
-            <img src="{{ url_for('static', filename='uploads/' + uploaded_filename) }}" alt="Uploaded Image">
-            <div class="prediction-row">
-                {% if weather_result %}
-                <div class="prediction-result">Weather Prediction: {{ weather_result }}</div>
-                {% endif %}
-                {% if daynight_result %}
-                <div class="prediction-result">Time Prediction: {{ daynight_result }}</div>
-                {% endif %}
-            </div>
+
+<!-- ================= RESULTS SECTION ================= -->
+{% if uploaded_filename %}
+<section class="services">
+    <h2>Analysis Results</h2>
+
+    <div class="service-grid">
+
+        <!-- Original Image -->
+        <div class="service-card">
+            <h3>Uploaded Image</h3>
+            <img src="{{ url_for('static', filename='uploads/' + uploaded_filename) }}"
+                 style="width:100%; border-radius:12px;">
+        </div>
+
+        <!-- Detection -->
+        {% if detection_img %}
+        <div class="service-card">
+            <h3>Detected Objects</h3>
+            <img src="{{ url_for('static', filename='uploads/' + detection_img) }}"
+                 style="width:100%; border-radius:12px;">
         </div>
         {% endif %}
+
+        <!-- Segmentation -->
+        {% if segmentation_img %}
+        <div class="service-card">
+            <h3>Scene Understanding</h3>
+            <img src="{{ url_for('static', filename='uploads/' + segmentation_img) }}"
+                 style="width:100%; border-radius:12px;">
+        </div>
+        {% endif %}
+
     </div>
-</div>
+
+    <!-- Classification Result -->
+    {% if classification_result %}
+        {% set parts = classification_result.split(' (') %}
+        {% set raw_label = parts[0] %}
+        {% set confidence = parts[1].replace(')', '') %}
+        {% set confidence_percent = (confidence|float * 100)|round(2) %}
+
+        {% if raw_label == "Class_0" %}
+            {% set readable_label = "Highway" %}
+        {% elif raw_label == "Class_1" %}
+            {% set readable_label = "Residential Area" %}
+        {% elif raw_label == "Class_2" %}
+            {% set readable_label = "City Street" %}
+        {% elif raw_label == "Class_3" %}
+            {% set readable_label = "Parking Area" %}
+        {% elif raw_label == "Class_4" %}
+            {% set readable_label = "Tunnel" %}
+        {% elif raw_label == "Class_5" %}
+            {% set readable_label = "Urban Traffic" %}
+        {% elif raw_label == "Class_6" %}
+            {% set readable_label = "Bridge" %}
+        {% elif raw_label == "Class_7" %}
+            {% set readable_label = "Rural Road" %}
+        {% else %}
+            {% set readable_label = "Unknown Scene" %}
+        {% endif %}
+
+        <div class="service-card" style="max-width:600px; margin:40px auto;">
+            <h3>Scene Category</h3>
+            <h2 style="color:#1e88e5; margin-top:10px;">
+                {{ readable_label }}
+            </h2>
+            <p style="margin-top:10px;">
+                Confidence Level:
+                <strong>{{ confidence_percent }}%</strong>
+            </p>
+            <p style="margin-top:15px; color:#666;">
+                The system analyzed the uploaded image and identified
+                the overall scene category along with highlighted objects
+                and region segmentation.
+            </p>
+        </div>
+    {% endif %}
+
+    <!-- Combined Output -->
+    {% if combined_img %}
+    <div class="service-card" style="max-width:800px; margin:40px auto;">
+        <h3>Comprehensive Visual Analysis</h3>
+        <img src="{{ url_for('static', filename='uploads/' + combined_img) }}"
+             style="width:100%; border-radius:12px;">
+    </div>
+    {% endif %}
+
+</section>
+{% endif %}
 
 </body>
 </html>
